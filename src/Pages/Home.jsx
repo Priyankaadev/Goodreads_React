@@ -1,4 +1,5 @@
 import Logo from 'Assets/Images/logo-goodreads.png'
+import { Link } from 'react-router-dom';
 
 function Home() {
     return (
@@ -22,11 +23,11 @@ function Home() {
                 <div className='flex basis-[30%] gap-5'>
                     <button 
                     className='bg-[#4E36AF] text-white rounded-md px-4 py-2 text-2xl hover:text-white hover:bg-[#271D43]'>
-                    Register
+                    <Link to='/signup'>Register</Link>
                     </button>
                     <button 
                     className='btn btn-warning text-[#271D43]  rounded-md px-4 py-2 text-2xl hover:text-white hover:bg-[#271D43]'>
-                    Login
+                    <Link to='/login'>Login</Link>
                     </button>
                 </div>
             </div>
