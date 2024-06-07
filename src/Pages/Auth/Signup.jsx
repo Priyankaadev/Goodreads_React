@@ -35,10 +35,10 @@ export default function Signup() {
         e.preventDefault();
         const response = await dispatch(signup(signupDetails))
         if(response?.payload?.data){
-            resetForm()
+          
             navigate("/login")
         }
-
+  resetForm()
 
     }
 

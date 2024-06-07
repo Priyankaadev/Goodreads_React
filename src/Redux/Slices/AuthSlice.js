@@ -16,6 +16,7 @@ export const signup = createAsyncThunk('auth/signup', async (data)=>{
             success: 'Successfully signed up!!',
             error : 'Something went wrong'
         } )
+        return response
     } catch (error) {
         console.log(error);
         toast.error('Cannot signup, something went wrong')

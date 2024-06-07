@@ -35,10 +35,11 @@ export default function Login() {
         e.preventDefault();
         const response = await dispatch(signin(signinDetails))
         if(response?.payload?.data){
-            
-         navigate('/')
+             resetForm()
+         navigate('/dashboard')
+        
         }
-resetForm()
+
     }
     
     return (
