@@ -1,24 +1,26 @@
+import Layout from "Layouts/Layout";
 import { signup } from "Redux/Slices/AuthSlice";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const state = useSelector((state)=> state.auth)
 
     const [signupDetails, setSignupDetails] = useState({
         email: '',
         password: '',
-        username: '',
+        username: ''
     })
 
     function resetForm(){
         setSignupDetails({
             email: '',
             password: '',
-            username: '',
+            username: ''
         })
     }
 
@@ -42,7 +44,15 @@ export default function Signup() {
 
     }
 
+    useEffect(()=>{
+     console.log(state.isLoggedIn);
+        if(state.isLoggedIn){
+            navigate('/dashboard')
+        }
+    },[])
+
     return (
+        <Layout >
         <div className="h-[100vh] text-[#271D43] flex flex-col items-center justify-center">
             <div>
                 <h1 className=" text-5xl"> Create a new account</h1>
@@ -94,6 +104,6 @@ export default function Signup() {
 
             </div>
         </div>
-
+</Layout>
     )
 }

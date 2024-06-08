@@ -1,12 +1,14 @@
+import Layout from "Layouts/Layout";
 import { signin } from "Redux/Slices/AuthSlice";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const state = useSelector((state)=> state.auth)
 
 
 
@@ -35,14 +37,22 @@ export default function Login() {
         e.preventDefault();
         const response = await dispatch(signin(signinDetails))
         if(response?.payload?.data){
-             resetForm()
+          
          navigate('/dashboard')
         
         }
-
+   resetForm()
     }
+
+    useEffect(()=>{
+        console.log(state.isLoggedIn);
+           if(state.isLoggedIn){
+               navigate('/dashboard')
+           }
+       },[])
     
     return (
+        <Layout >
         <div className="h-[100vh] text-[#271D43] flex flex-col items-center justify-center">
             <div>
                 <h1 className=" text-5xl"> Login to your account </h1>
@@ -85,6 +95,7 @@ export default function Login() {
 
             </div>
         </div>
-
+  </Layout>
     )
+  
 }

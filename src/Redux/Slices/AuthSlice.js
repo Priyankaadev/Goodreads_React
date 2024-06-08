@@ -5,7 +5,7 @@ import axiosInstance from 'Configs/axiosInstance'
 const initialState={
     isLoggedIn : localStorage.getItem('isLoggedIn') || false,
     username : localStorage.getItem('username') ||'',
-    token : localStorage.getItem('token') ||''
+    token : localStorage.getItem('token') ||'',
 }
 
 export const signup = createAsyncThunk('auth/signup', async (data)=>{
@@ -16,7 +16,7 @@ export const signup = createAsyncThunk('auth/signup', async (data)=>{
             success: 'Successfully signed up!!',
             error : 'Something went wrong'
         } )
-        return response
+        return await response
     } catch (error) {
         console.log(error);
         toast.error('Cannot signup, something went wrong')
@@ -43,7 +43,14 @@ export const signin = createAsyncThunk('auth/signin', async (data)=>{
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers :{},
+    reducers :{
+        logout : (state )=>{
+            state.isLoggedIn = false;
+            state.token = '';
+            state.username = '';
+            localStorage.clear()
+        }
+    },
     extraReducers: (builder)=>
         builder.addCase(signin.fulfilled, (state, action)=>{
           if(action?.payload?.data){
@@ -58,5 +65,7 @@ const authSlice = createSlice({
         } )
     }
 )
+
+export const {logout} =  authSlice.actions;
 
 export default authSlice.reducer;

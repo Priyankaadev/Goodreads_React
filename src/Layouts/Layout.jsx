@@ -5,8 +5,11 @@ export default function Layout({children}){
     return(
         <>
         <Navbar />
-        <div className="h-[90vh]">
-            {children}
+        <div className="h-[90vh] flex items-start justify-center">
+            <div className="w-[80%]">
+                 {children}
+            </div>
+           
         </div>
         <Footer />
         </>
