@@ -15,6 +15,9 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'semi' :[1, 'always'],
     'react/jsx-no-target-blank': 'off',
+    'react/prop-types': 'off',
+
+
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
