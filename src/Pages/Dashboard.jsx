@@ -1,14 +1,29 @@
-
 import BookCard from "Components/BookCard/BookCard";
 import Layout from "Layouts/Layout";
+import { getAllBooks } from "Redux/Slices/BookSlice";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function Dashboard() {
+
+    const bookState = useSelector((state)=> state.book )
+    const dispatch = useDispatch()
+
+   async function loadBooks(){
+    if(bookState.bookList.length == 0){
+        const response = await dispatch(getAllBooks())
+        console.log(response);
+    }
+   }
+    useEffect(()=>{
+        loadBooks()
+    },[]);
+
     return (
         <Layout >
-            <div >
-                <BookCard title="The Day The World Stops Shopping" author='abc' description='abccccc'/>
-
-            </div>
+            {bookState.bookList.length >0 && bookState.bookList.map(book =>{
+                return <BookCard key={book._id} data={book} />
+            })}
         </Layout>
     )
 }
